@@ -8,3 +8,6 @@ then it adds it as a remote to the current repo and pushes the current branch.
 
 `npm install -g git-publish`
 
+## Usage
+
+`username=YourUserName password=YourPassword git publish`

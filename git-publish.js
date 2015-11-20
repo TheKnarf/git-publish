@@ -12,12 +12,11 @@ program
 	.option('-N, --name <name>', 'Name for the newly created repo, defaults to directory name', currentFolderName)
 //	.option('-D, --description <desc>', 'Discription for the new repo')
 //	.option('-U, --user <username>', 'Username for login on the selected provider')
+//	.option('--private', 'Publish it as a private repo')
+//	.option('--public', 'Publish it as a public repo')
+//	.option('--wiki', 'Publish it with a wiki if the provider supports wikis')
+//	.option('--issues', 'Publish it with a issue tracker if the provider supports issue trackers')
 //	.option('-I, --interactive', 'Ask for properties like provider and name interactivly', false)
-
-// TODO: other things to add options for:
-// 		- private / public repo
-// 		- has_issues
-// 		- has wiki
 
 program.parse(process.argv);
 
