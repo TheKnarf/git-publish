@@ -20,7 +20,7 @@
     "github": "^0.2.4"
   },
   "bin": {
-	  "git-publish": "git-publish.js",
-	  "git-publish-provider-github": "git-publish-provider-github.js"
+    "git-publish": "git-publish.js",
+    "git-publish-provider-github": "git-publish-provider-github.js"
   }
 }
