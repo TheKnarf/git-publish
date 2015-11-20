@@ -6,7 +6,10 @@ then it adds it as a remote to the current repo and pushes the current branch.
 
 ## Installation
 
-`npm install -g git-publish`
+~~`Npm install -g git-publish`~~
+- clone the repo
+
+- `npm install -g`
 
 ## Usage
 
