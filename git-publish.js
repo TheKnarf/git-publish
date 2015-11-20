@@ -16,7 +16,9 @@ program
 //	.option('--public', 'Publish it as a public repo')
 //	.option('--wiki', 'Publish it with a wiki if the provider supports wikis')
 //	.option('--issues', 'Publish it with a issue tracker if the provider supports issue trackers')
+//	.option('--protocol [https, ssh], 'Decide if you want https or ssh for your git remote if the provider supports it, default is ssh', 'ssh')
 //	.option('-I, --interactive', 'Ask for properties like provider and name interactivly', false)
+//	.option('--all', 'Publish all local branches', false)
 
 program.parse(process.argv);
 

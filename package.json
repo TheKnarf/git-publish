@@ -13,6 +13,7 @@
     "gitlab",
     "publish"
   ],
+  "repository": "TheKnarf/git-publish",
   "author": "Frank Lyder Bredland <fl@nyggen.com>",
   "license": "MIT",
   "dependencies": {
