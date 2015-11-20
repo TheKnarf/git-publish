@@ -1,0 +1,26 @@
+{
+  "name": "git-publish",
+  "version": "0.0.1",
+  "description": "Publish your git repo to GitHub, BitBucket or GitLab with a single command",
+  "main": "git-publish.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "git",
+    "github",
+    "bitbucket",
+    "gitlab",
+    "publish"
+  ],
+  "author": "Frank Lyder Bredland <fl@nyggen.com>",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^2.9.0",
+    "github": "^0.2.4"
+  },
+  "bin": {
+	  "git-publish": "git-publish.js",
+	  "git-publish-provider-github": "git-publish-provider-github.js"
+  }
+}
