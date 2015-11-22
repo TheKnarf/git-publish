@@ -6,7 +6,7 @@ var program = require('commander'),
 var currentFolderName = require('path').basename(process.cwd());
 
 program
-	.version('0.0.1')
+	.version('0.0.2')
 	.description('Create a repo on providers like GitHub, Bitbucket or Gitlab and push to it with a single command')
 	.option('-P, --provider [GitHub, Bitbucket, GitLab]', 'Change witch provider to use, defaults to GitHub', 'github')
 	.option('-N, --name <name>', 'Name for the newly created repo, defaults to directory name', currentFolderName)
