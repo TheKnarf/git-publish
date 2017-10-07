@@ -1,13 +1,18 @@
 #!/usr/bin/env node
 
 var GitHubApi = require("github");
-var name = process.argv[2];
 
-if(typeof name == 'undefined') {
-	console.error('Missing argument name');
-	process.exit(1);	
-}
-
+const argv = require('yargs')
+	.demandOption(['name', 'password', 'username'])
+	.option('name', {
+		alias: 'n'
+	})
+	.option('password', {
+		alias: 'p'
+	})
+	.option('username', {
+		alias: 'u'
+	}).argv;
 
 var github = new GitHubApi({
 	version: '3.0.0'
@@ -15,15 +20,17 @@ var github = new GitHubApi({
 
 github.authenticate({
 	type: 'basic',
-	username: process.env.username,
-	password: process.env.password
+	username: argv.username,
+	password: argv.password
 });
 
 github.repos.create({
-	name: name
+	name: argv.name
 }, function(error, result) {
-	if(error != null)
+	if(error !== null) {
+		console.log(error);
 		process.exit(1);
+	}
 
 	console.log(result['clone_url']);
 });

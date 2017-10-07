@@ -18,7 +18,9 @@
   "license": "MIT",
   "dependencies": {
     "commander": "^2.9.0",
-    "github": "^0.2.4"
+    "github": "^0.2.4",
+    "yargs": "^9.0.1",
+    "find-up": "latest"
   },
   "bin": {
     "git-publish": "git-publish.js",
