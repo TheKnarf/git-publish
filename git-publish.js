@@ -18,6 +18,9 @@ var arguments = yargs
     .option('provider', {
         alias: 'P',
         default: 'github'
+    })
+    .option('private', {
+        default: false
     });
 
 // If the config object is empty
@@ -39,7 +42,8 @@ var cmd = 'git-publish-provider-'
     + argv.provider.toLowerCase()
     + ' -n ' + argv.name
     + ' -u ' + argv.username
-    + ' -p ' + argv.password;
+    + ' -p ' + argv.password
+    + (argv.private ? ' -P ' : '');
 
 exec(cmd, function (error, stdout, stderr) {
     if (error !== null) {

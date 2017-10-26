@@ -12,6 +12,10 @@ const argv = require('yargs')
 	})
 	.option('username', {
 		alias: 'u'
+	})
+	.option('private', {
+		alias: 'P',
+		default: false
 	}).argv;
 
 var github = new GitHubApi({
@@ -25,7 +29,8 @@ github.authenticate({
 });
 
 github.repos.create({
-	name: argv.name
+	name: argv.name,
+	private: argv.private
 }, function(error, result) {
 	if(error !== null) {
 		console.log(error);
