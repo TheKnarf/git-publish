@@ -1,54 +1,71 @@
 #!/usr/bin/env node
 
-var program = require('commander'),
-	 exec = require('child_process').exec;
+const findUp = require('find-up');
+const fs = require('fs');
+const configPath = findUp.sync(['.gitpublishrc', '.gitpublishrc.json']);
+const config = configPath ? JSON.parse(fs.readFileSync(configPath)) : {};
+const yargs = require('yargs');
+
 
 var currentFolderName = require('path').basename(process.cwd());
 
-program
-	.version('0.0.2')
-	.description('Create a repo on providers like GitHub, Bitbucket or Gitlab and push to it with a single command')
-	.option('-P, --provider [GitHub, Bitbucket, GitLab]', 'Change witch provider to use, defaults to GitHub', 'github')
-	.option('-N, --name <name>', 'Name for the newly created repo, defaults to directory name', currentFolderName)
-//	.option('-D, --description <desc>', 'Discription for the new repo')
-//	.option('-U, --user <username>', 'Username for login on the selected provider')
-//	.option('--private', 'Publish it as a private repo')
-//	.option('--public', 'Publish it as a public repo')
-//	.option('--wiki', 'Publish it with a wiki if the provider supports wikis')
-//	.option('--issues', 'Publish it with a issue tracker if the provider supports issue trackers')
-//	.option('--protocol [https, ssh], 'Decide if you want https or ssh for your git remote if the provider supports it, default is ssh', 'ssh')
-//	.option('-I, --interactive', 'Ask for properties like provider and name interactivly', false)
-//	.option('--all', 'Publish all local branches', false)
+var arguments = yargs
+    .config(config)
+    .option('name', {
+        alias: 'N',
+        default: currentFolderName
+    })
+    .option('provider', {
+        alias: 'P',
+        default: 'github'
+    });
 
-program.parse(process.argv);
+// If the config object is empty
+if (Object.keys(config).length === 0) {
+    arguments = arguments
+        .demandOption(['username', 'password'])
+        .option('username', {
+            alias: 'u'
+        })
+        .option('password', {
+            alias: 'p'
+        });
+}
 
-var cmd = 'git-publish-provider-' + program.provider.toLowerCase() + ' ' + program.name;
+const argv = arguments.argv;
 
-exec(cmd, function(error, stdout, stderr) {
-	if(error != null) {
-		console.log("Error: ", stderr);
-		process.exit(error);
-	}
+var exec = require('child_process').exec;
+var cmd = 'git-publish-provider-'
+    + argv.provider.toLowerCase()
+    + ' -n ' + argv.name
+    + ' -u ' + argv.username
+    + ' -p ' + argv.password;
 
-	var git_remote = stdout,
-		 cmd_add_remote = 'git remote add origin ' + git_remote,
-		 cmd_git_push = 'git push -u origin $(git symbolic-ref HEAD)';
+exec(cmd, function (error, stdout, stderr) {
+    if (error !== null) {
+        console.log("Error: ", stderr);
+        process.exit(error);
+    }
 
-	console.log(cmd_add_remote);
-	exec(cmd_add_remote, function(error, stdout, stderr) {
-		if(error != null) {
-			console.log("Error: ", stderr);
-			process.exit(error);
-		}
+    var git_remote = stdout,
+        cmd_add_remote = 'git remote add origin ' + git_remote,
+        cmd_git_push = 'git push -u origin $(git symbolic-ref HEAD)';
 
-		console.log(cmd_git_push);
-		exec(cmd_git_push, function(error, stdout, stderr) {
-			if(error != null) {
-				console.log("Error: ", stderr);
-				process.exit(error);
-			}
+    console.log(cmd_add_remote);
+    exec(cmd_add_remote, function (error, stdout, stderr) {
+        if (error !== null) {
+            console.log("Error: ", stderr);
+            process.exit(error);
+        }
 
-			console.log(stdout);
-		});
-	});
+        console.log(cmd_git_push);
+        exec(cmd_git_push, function (error, stdout, stderr) {
+            if (error !== null) {
+                console.log("Error: ", stderr);
+                process.exit(error);
+            }
+
+            console.log(stdout);
+        });
+    });
 });
