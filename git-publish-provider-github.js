@@ -23,6 +23,7 @@ const argv = require('yargs')
         alias: 'o'
     }).argv;
 
+
 var github = new GitHubApi({
     version: '3.0.0'
 });
@@ -32,11 +33,6 @@ github.authenticate({
     username: argv.username,
     password: argv.password
 });
-
-var requestArguments = {
-    name: argv.name,
-	private: argv.private
-};
 
 if (argv.otpCode) {
     requestArguments["headers"] = { "X-GitHub-OTP":  argv.otpCode };
