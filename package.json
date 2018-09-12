@@ -18,9 +18,10 @@
   "license": "MIT",
   "dependencies": {
     "commander": "^2.9.0",
+    "find-up": "latest",
     "github": "^0.2.4",
-    "yargs": "^9.0.1",
-    "find-up": "latest"
+    "prompt": "^1.0.0",
+    "yargs": "^9.0.1"
   },
   "bin": {
     "git-publish": "git-publish.js",
