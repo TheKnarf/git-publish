@@ -1,5 +1,7 @@
 # Git publish
 
+[![NpmVersion](https://img.shields.io/npm/v/git-publish.svg)](https://www.npmjs.com/package/git-publish)
+
 Git publish lets you push your git repo to GitHub, BitBucket or GitLab with a single command, `git publish`.
 It uses the corresponding sites API to create a new repo with the name of the current folder you're in.
 
